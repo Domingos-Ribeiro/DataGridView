@@ -44,11 +44,16 @@ namespace ProjetoCLR {
 	private: System::Windows::Forms::TextBox^ txtLocalizar;
 	private: System::Windows::Forms::Button^ btnContarNome;
 	private: System::Windows::Forms::TextBox^ txtContarNome;
-	private: System::Windows::Forms::Button^ button2;
+	private: System::Windows::Forms::Button^ btnEliminaTudo;
+
 	private: System::Windows::Forms::GroupBox^ groupBox1;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::GroupBox^ groupBox2;
 	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::TextBox^ txtEliminarNome;
+	private: System::Windows::Forms::Button^ btnEliminarNomeSelecionado;
+	private: System::Windows::Forms::Button^ btnEliminarUltimaLinha;
+	private: System::Windows::Forms::Button^ btnEliminarPrimeiraLinha;
 
 	private:
 		/// <summary>
@@ -72,10 +77,14 @@ namespace ProjetoCLR {
 			this->txtLocalizar = (gcnew System::Windows::Forms::TextBox());
 			this->btnContarNome = (gcnew System::Windows::Forms::Button());
 			this->txtContarNome = (gcnew System::Windows::Forms::TextBox());
-			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->btnEliminaTudo = (gcnew System::Windows::Forms::Button());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
+			this->txtEliminarNome = (gcnew System::Windows::Forms::TextBox());
+			this->btnEliminarNomeSelecionado = (gcnew System::Windows::Forms::Button());
+			this->btnEliminarUltimaLinha = (gcnew System::Windows::Forms::Button());
+			this->btnEliminarPrimeiraLinha = (gcnew System::Windows::Forms::Button());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->groupBox1->SuspendLayout();
@@ -86,7 +95,7 @@ namespace ProjetoCLR {
 			// 
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(2) { this->Nome, this->Localidade });
-			this->dataGridView1->Location = System::Drawing::Point(541, 12);
+			this->dataGridView1->Location = System::Drawing::Point(478, 12);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->Size = System::Drawing::Size(242, 323);
 			this->dataGridView1->TabIndex = 0;
@@ -123,7 +132,7 @@ namespace ProjetoCLR {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(176, 88);
+			this->button1->Location = System::Drawing::Point(159, 88);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(128, 25);
 			this->button1->TabIndex = 3;
@@ -133,14 +142,14 @@ namespace ProjetoCLR {
 			// 
 			// txtLocalizar
 			// 
-			this->txtLocalizar->Location = System::Drawing::Point(176, 61);
+			this->txtLocalizar->Location = System::Drawing::Point(159, 61);
 			this->txtLocalizar->Name = L"txtLocalizar";
 			this->txtLocalizar->Size = System::Drawing::Size(128, 20);
 			this->txtLocalizar->TabIndex = 4;
 			// 
 			// btnContarNome
 			// 
-			this->btnContarNome->Location = System::Drawing::Point(336, 90);
+			this->btnContarNome->Location = System::Drawing::Point(304, 90);
 			this->btnContarNome->Name = L"btnContarNome";
 			this->btnContarNome->Size = System::Drawing::Size(128, 23);
 			this->btnContarNome->TabIndex = 5;
@@ -150,19 +159,20 @@ namespace ProjetoCLR {
 			// 
 			// txtContarNome
 			// 
-			this->txtContarNome->Location = System::Drawing::Point(336, 61);
+			this->txtContarNome->Location = System::Drawing::Point(304, 61);
 			this->txtContarNome->Name = L"txtContarNome";
 			this->txtContarNome->Size = System::Drawing::Size(128, 20);
 			this->txtContarNome->TabIndex = 6;
 			// 
-			// button2
+			// btnEliminaTudo
 			// 
-			this->button2->Location = System::Drawing::Point(16, 58);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(128, 23);
-			this->button2->TabIndex = 7;
-			this->button2->Text = L"Eliminar Tudo";
-			this->button2->UseVisualStyleBackColor = true;
+			this->btnEliminaTudo->Location = System::Drawing::Point(304, 63);
+			this->btnEliminaTudo->Name = L"btnEliminaTudo";
+			this->btnEliminaTudo->Size = System::Drawing::Size(128, 23);
+			this->btnEliminaTudo->TabIndex = 7;
+			this->btnEliminaTudo->Text = L"Eliminar Tudo";
+			this->btnEliminaTudo->UseVisualStyleBackColor = true;
+			this->btnEliminaTudo->Click += gcnew System::EventHandler(this, &Form1::btnEliminaTudo_Click);
 			// 
 			// groupBox1
 			// 
@@ -175,7 +185,7 @@ namespace ProjetoCLR {
 			this->groupBox1->Controls->Add(this->txtContarNome);
 			this->groupBox1->Location = System::Drawing::Point(12, 12);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(483, 128);
+			this->groupBox1->Size = System::Drawing::Size(448, 128);
 			this->groupBox1->TabIndex = 8;
 			this->groupBox1->TabStop = false;
 			// 
@@ -192,13 +202,54 @@ namespace ProjetoCLR {
 			// 
 			// groupBox2
 			// 
+			this->groupBox2->Controls->Add(this->txtEliminarNome);
+			this->groupBox2->Controls->Add(this->btnEliminarNomeSelecionado);
+			this->groupBox2->Controls->Add(this->btnEliminarUltimaLinha);
+			this->groupBox2->Controls->Add(this->btnEliminarPrimeiraLinha);
 			this->groupBox2->Controls->Add(this->label2);
-			this->groupBox2->Controls->Add(this->button2);
+			this->groupBox2->Controls->Add(this->btnEliminaTudo);
 			this->groupBox2->Location = System::Drawing::Point(12, 208);
 			this->groupBox2->Name = L"groupBox2";
-			this->groupBox2->Size = System::Drawing::Size(483, 127);
+			this->groupBox2->Size = System::Drawing::Size(448, 127);
 			this->groupBox2->TabIndex = 9;
 			this->groupBox2->TabStop = false;
+			// 
+			// txtEliminarNome
+			// 
+			this->txtEliminarNome->Location = System::Drawing::Point(16, 98);
+			this->txtEliminarNome->Multiline = true;
+			this->txtEliminarNome->Name = L"txtEliminarNome";
+			this->txtEliminarNome->Size = System::Drawing::Size(128, 23);
+			this->txtEliminarNome->TabIndex = 11;
+			// 
+			// btnEliminarNomeSelecionado
+			// 
+			this->btnEliminarNomeSelecionado->Location = System::Drawing::Point(159, 98);
+			this->btnEliminarNomeSelecionado->Name = L"btnEliminarNomeSelecionado";
+			this->btnEliminarNomeSelecionado->Size = System::Drawing::Size(273, 23);
+			this->btnEliminarNomeSelecionado->TabIndex = 10;
+			this->btnEliminarNomeSelecionado->Text = L"Eliminar Nome Digitado na TextBox";
+			this->btnEliminarNomeSelecionado->UseVisualStyleBackColor = true;
+			// 
+			// btnEliminarUltimaLinha
+			// 
+			this->btnEliminarUltimaLinha->Location = System::Drawing::Point(159, 63);
+			this->btnEliminarUltimaLinha->Name = L"btnEliminarUltimaLinha";
+			this->btnEliminarUltimaLinha->Size = System::Drawing::Size(128, 23);
+			this->btnEliminarUltimaLinha->TabIndex = 9;
+			this->btnEliminarUltimaLinha->Text = L"Eliminar a Ultima Linha";
+			this->btnEliminarUltimaLinha->UseVisualStyleBackColor = true;
+			this->btnEliminarUltimaLinha->Click += gcnew System::EventHandler(this, &Form1::btnEliminarUltimaLinha_Click);
+			// 
+			// btnEliminarPrimeiraLinha
+			// 
+			this->btnEliminarPrimeiraLinha->Location = System::Drawing::Point(16, 63);
+			this->btnEliminarPrimeiraLinha->Name = L"btnEliminarPrimeiraLinha";
+			this->btnEliminarPrimeiraLinha->Size = System::Drawing::Size(128, 23);
+			this->btnEliminarPrimeiraLinha->TabIndex = 8;
+			this->btnEliminarPrimeiraLinha->Text = L"Eliminar a 1ª Linha";
+			this->btnEliminarPrimeiraLinha->UseVisualStyleBackColor = true;
+			this->btnEliminarPrimeiraLinha->Click += gcnew System::EventHandler(this, &Form1::btnEliminarPrimeiraLinha_Click);
 			// 
 			// label2
 			// 
@@ -215,7 +266,7 @@ namespace ProjetoCLR {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(795, 415);
+			this->ClientSize = System::Drawing::Size(732, 352);
 			this->Controls->Add(this->groupBox2);
 			this->Controls->Add(this->groupBox1);
 			this->Controls->Add(this->dataGridView1);
@@ -287,8 +338,30 @@ private: System::Void btnContarNome_Click(System::Object^ sender, System::EventA
 
 	MessageBox::Show("O Nome foi encontrado " + nome + " vezes.");
 }
-private: System::Void Form1_Load(System::Object^ sender, System::EventArgs^ e) {
+private: System::Void Form1_Load(System::Object^ sender, System::EventArgs^ e) 
+{
+
 }
+
+
+private: System::Void btnEliminarPrimeiraLinha_Click(System::Object^ sender, System::EventArgs^ e) 
+{
+	dataGridView1->Rows->RemoveAt(0);
+}
+
+
+private: System::Void btnEliminaTudo_Click(System::Object^ sender, System::EventArgs^ e) 
+{
+	dataGridView1->Rows->Clear();
+}
+
+
+private: System::Void btnEliminarUltimaLinha_Click(System::Object^ sender, System::EventArgs^ e) 
+{
+	//Ainda não está pronto------ Fazer o exercicio 16
+	dataGridView1->Rows;
+}
+
 
 };
 }
