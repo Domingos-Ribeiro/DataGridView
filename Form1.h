@@ -359,7 +359,7 @@ private: System::Void btnEliminaTudo_Click(System::Object^ sender, System::Event
 private: System::Void btnEliminarUltimaLinha_Click(System::Object^ sender, System::EventArgs^ e) 
 {
 	//Ainda não está pronto------ Fazer o exercicio 16
-	dataGridView1->Rows;
+	//dataGridView1->Rows->RemoveAt(DataGridViewCell->)
 }
 
 
